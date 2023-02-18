@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Note>
+@{
+    ViewData["Title"] = "Notes";
+}
+
+<div class="container p-3">
+ <div class="row">
+    <div class="col-6 ">
+       <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">
+                Notes
+       </div>
+    </div>
+    <div class="col-6 text-end">
+        <a asp-controller="Note" asp-action="AddNote" class="btn btn-dark">Add new note</a>
+    </div>
+    <div>
+      @if (Model.Count() > 0)
+      {
+         <table class="table table-bordered border-dark" style="width:100%">
+              <tbody>
+                 @foreach (var item in Model)
+                 {
+                   <tr>
+                      <td width="85%">@item.NoteName</td>
+                        <td class="text-center">
+                           <a asp-controller="Note" asp-action="Index" asp-route-id="@item.NoteId" class="btn btn-info w-100">SubNotes</a>
+                        </td>
+                        <td class="text-center">
+                           <a asp-controller="Note" asp-action="AddNote" asp-route-id="@item.NoteId" class="btn btn-warning w-100">Add</a>
+                        </td>
+                        <td class="text-center">
+                           <a asp-controller="Note" asp-action="Delete" asp-route-id="@item.NoteId" class="btn btn-danger w-100">Delete</a>
+                        </td>
+                   </tr>
+                 }
+              </tbody>
+         </table>
+      }
+      else
+      {
+         <p>No items created yet</p>
+
+      }
+    </div>
+ </div>
+</div>
